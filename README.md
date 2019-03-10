@@ -20,6 +20,10 @@ Example: webcrawler https://vnexpress.net/the-gioi/may-bay-cho-189-nguoi-roi-xuo
 Check csv file
 ```
 
+```bash
+See sample: Sample.PNG
+```
+
 ## Usage
 
 Using Visual Studio to open Solution
@@ -126,13 +130,17 @@ public class VnExpressCrawler : Crawler
             crawlerResult.Url = url;
 
             // Get Title
-            crawlerResult.Title = document.DocumentNode.Descendants("h1").First(e => e.Attributes.Contains("class") && e.Attributes["class"].Value.Contains("title_news_detail mb10")).InnerText.Trim();
+            crawlerResult.Title = document.DocumentNode.Descendants("h1").First(e => e.Attributes.Contains("class") && e.Attributes["class"].Value.Contains("title_news_detail")).InnerText.Trim();
 
             // Get Content
-            crawlerResult.Content = document.DocumentNode.Descendants("article").First(e => e.Attributes.Contains("class") && e.Attributes["class"].Value.Contains("content_detail fck_detail width_common block_ads_connect")).InnerText.Trim();
+            crawlerResult.Content = document.DocumentNode.Descendants("article").First(e => e.Attributes.Contains("class") && e.Attributes["class"].Value.Contains("content_detail")).InnerText.Trim();
 
             // Get Author
-            crawlerResult.Author = document.DocumentNode.Descendants("p").First(e => e.Attributes.Contains("class") && e.Attributes["class"].Value.Contains("author_mail")).Descendants("strong").First().InnerText.Trim();
+            var authorInDetail = document.DocumentNode.Descendants("article").First(e => e.Attributes.Contains("class") && e.Attributes["class"].Value.Contains("content_detail")).Descendants("p").LastOrDefault(e=> e.Attributes.Contains("style") && e.Attributes["style"].Value.Contains("text-align:right;"));
+            if(authorInDetail != null)
+            {
+                crawlerResult.Author = authorInDetail.Descendants("strong").First().InnerHtml.Trim();
+            } else crawlerResult.Author = document.DocumentNode.Descendants("p").First(e => e.Attributes.Contains("class") && e.Attributes["class"].Value.Contains("author_mail")).Descendants("strong").First().InnerText.Trim();
 
             // Get Date
             crawlerResult.Date = document.DocumentNode.Descendants("span").First(e => e.Attributes.Contains("class") && e.Attributes["class"].Value.Contains("time left")).InnerText.Trim();

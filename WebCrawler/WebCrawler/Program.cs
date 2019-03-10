@@ -19,14 +19,14 @@ namespace WebCrawler
                 {
                     var url = args[0];
                     Console.WriteLine($"---------------------------------------------------");
-                    Console.WriteLine($"Url: {args[0]}");
+                    Console.WriteLine($"Url: {url}");
                     Uri myUri = new Uri(url);
                     string host = myUri.Host;
                     if (crawlers.ContainsKey(host))
                     {
                         ICrawler crawler = crawlers[host];
                         var dic = new Dictionary<string, ICrawlerResult>();
-                        crawler.Crawl(dic, args[0], 10);
+                        crawler.Crawl(dic, url, 20);
                         crawler.ExportToFile(dic);
                     }
                     else Console.WriteLine($"Not support this host: {host}");
