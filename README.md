@@ -24,9 +24,9 @@ Check csv file
 
 Using Visual Studio to open Solution
 
-## Explain
+## Explanation
 
-Interface ICrawlerResult
+Interface **ICrawlerResult**
 ```c#
 public interface ICrawler
 {
@@ -36,7 +36,7 @@ public interface ICrawler
 }
 ```
 
-Interface ICrawler
+Interface **ICrawler**
 ```c#
 public interface ICrawler
 {
@@ -46,7 +46,7 @@ public interface ICrawler
 }
 ```
 
-Class CrawlerResult
+Class **CrawlerResult**
 ```c#
 public class CrawlerResult: ICrawlerResult
 {
@@ -62,7 +62,7 @@ public class CrawlerResult: ICrawlerResult
 }
 ```
 
-Abstract Class Crawler
+Abstract Class **Crawler**
 ```c#
 public abstract class Crawler : ICrawler
 {
@@ -82,7 +82,7 @@ public abstract class Crawler : ICrawler
 }
 ```
 
-Class VnExpressCrawler interhit from Crawler to crawl url from vnexpress.net
+Class **VnExpressCrawler** interhit from **Crawler** to crawl url from **vnexpress.net**
 ```c#
 public class VnExpressCrawler : Crawler
 {
@@ -158,14 +158,14 @@ public class VnExpressCrawler : Crawler
 }
 ```
 
-Push all Crawlers to dictionary with key is value of host
+Push all **ICrawler** to dictionary with **host** is the key
 ```c#
 var crawlers = new Dictionary<string, ICrawler>();
 var vnExpressCrawler = new VnExpressCrawler();
 crawlers.Add(vnExpressCrawler.host, vnExpressCrawler);
 ```
 
-Read value of url from args and get ICrawler base on host.
+Read value of url from args[0] and get **ICrawler** base on host and crawl it
 ```c#
 if (args.Length > 0)
 {
