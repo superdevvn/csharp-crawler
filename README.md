@@ -165,7 +165,7 @@ var vnExpressCrawler = new VnExpressCrawler();
 crawlers.Add(vnExpressCrawler.host, vnExpressCrawler);
 ```
 
-Read value of url from args[0] and get **ICrawler** base on host and crawl it
+Read value of url from args[0] and get **ICrawler** base on host and crawl it & export to file
 ```c#
 if (args.Length > 0)
 {
